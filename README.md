@@ -6,7 +6,7 @@
 * Abstract a pattern for a model after identifying repetitions in code and relationships in data
 * Organize code for consistency and readability
 * Use database tools (like sqlite3) to view data and test outcomes of Ruby code
-* Build test methods with descriptive output and clear indicators of passing tests.
+* Build test methods with descriptive output and clear indicators of passing tests
 
 ##Summary 
 
