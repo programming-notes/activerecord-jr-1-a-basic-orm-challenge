@@ -49,8 +49,7 @@ We're going to implement **ActiveRecord, Jr.** to get an idea of how one might b
 
 #### Working with a Skeleton Application
 
-This challenge starts with a base skeleton application which is
-located in the `source/active_record_jr` directory in the source directory. 
+This challenge starts with a base skeleton application which is located in the `source/active_record_jr` directory. 
 The skeleton code assumes there are two tables: `students` and `cohorts`.  A student belongs to a single cohort and a cohort has many students.
 
 There are a lot of files in the skeleton, so start by exploring the code.  Here's what each file means:
