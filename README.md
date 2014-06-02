@@ -1,14 +1,14 @@
 # ActiveRecord Jr 1 A Basic ORM
- 
-##Learning Competencies 
- 
+
+##Learning Competencies
+
 * Use Ruby commands to encapsulate standard SQL CRUD operations on a relational database
 * Abstract a pattern for a model after identifying repetitions in code and relationships in data
 * Organize code for consistency and readability
 * Use database tools (like sqlite3) to view data and test outcomes of Ruby code
-* Build test methods with descriptive output and clear indicators of passing tests
+* Build rspec tests for existing code
 
-##Summary 
+##Summary
 
  In previous challenges we've drawn a map between Ruby World and SQL World that looked something like this:
 
@@ -49,7 +49,7 @@ We're going to implement **ActiveRecord, Jr.** to get an idea of how one might b
 
 #### Working with a Skeleton Application
 
-This challenge starts with a base skeleton application which is located in the `source/active_record_jr` directory. 
+This challenge starts with a base skeleton application which is located in the `source/active_record_jr` directory.
 The skeleton code assumes there are two tables: `students` and `cohorts`.  A student belongs to a single cohort and a cohort has many students.
 
 There are a lot of files in the skeleton, so start by exploring the code.  Here's what each file means:
@@ -140,35 +140,21 @@ Run the following commands inside the `activerecord_jr` directory to start inter
 
 ###Release 1 : Write Simple Tests
 
-Before we refactor, we should write some simple tests.  The tests don't need to be super thorough, but it should verify the core functionality: reading/writing from/to the database, updating attributes, etc.
-
-Once you have a handful of tests that pass for the skeleton code, you'll be more certain that your refactoring isn't inadvertently changing anything.  If you refactor and the tests now fail, you'll know something has changed.
+Before we refactor, we should write some simple tests.  They should exercise each of the methods that are in the `Student` and `Cohort` classes.  Once you have your tests that pass for the code you were given, you'll be more certain that your refactoring isn't inadvertently changing anything.  If you refactor and the tests now fail, you'll know something has changed.
 
 `rake db:seed` should continue to work the same before and after your refactoring, for example.
 
-Write a script that you can run to sanity check your refactoring.  Make sure, for example, that something like this continues to work:
+To run your specs, navigate into the following folder:
 
 ```ruby
-cohort = Cohort.find(1)
-cohort[:name] = 'Best Cohort Ever'
-cohort.save
-
-# This re-queries the database, so we're checking that we actually
-# saved the data as intended
-Cohort.find(1)[:name] == 'Best Cohort Ever'
+activerecord-jr-1-a-basic-orm-challenge/source/activerecord_jr
 ```
-
-You can create a simple test file called, e.g., `test.rb`, in the root directory of ActiveRecord, Jr.  It should include the `app.rb` on the first line, which automatically includes all the necessary code.  Something like this:
+Just type the following command to run your spec files:
 
 ```ruby
-require_relative 'app'
-
-# Your totally awesome test code goes here
+> rspec
 ```
-
-When you run `test.rb` it should print out useful information so that it's easy as pie to tell when you've (accidentally) broken something.
-
-If you like, you can push yourself and write your tests in [RSpec](); if not it is fine to stick to basic assert statements.
+It will pick up all of your rspec tests in your spec folder and run them.
 
 ###Release 2 : Refactor Into the Base Class
 
@@ -182,6 +168,8 @@ If you look at `student.rb` and `cohort.rb` you'll see they have tons and tons o
 
 Be careful because the base class only knows what it's told.  `Database::Model` doesn't know that `Student` maps to the `students` table, for example.  Refactor out the following shared methods from `Student` and `Cohort` without doing anything to the `Student` and `Cohort` classes beyond removing the methods.  The code in the methods might need to change, though.
 
+**NOTE: After each small incremental change you complete, run your specs.  Change one thing and make sure you are still green!  Avoid going down rabbit holes.**
+
 1. Move `Student#initialize` and `Cohort#initialize` to `Database::Model#initialize`
 2. Move `Student#save` and `Cohort#save` to `Database::Model#save`
 3. Move `Student#[]` and `Cohort#[]` to `Database::Model#[]`
@@ -189,13 +177,13 @@ Be careful because the base class only knows what it's told.  `Database::Model` 
 
 Feel free to play around in the ActiveRecord, Jr. console to get a feel for how it works.  And **remember**, once a method is moved to `Database::Model` you might need to change hard-coded references to the classes the method came from.
 
-##Optimize Your Learning 
+##Optimize Your Learning
 
-Discuss the following questions with your pair or answer in a journal entry: 
+Discuss the following questions with your pair or answer in a journal entry:
 
   * What did these refactorings accomplish?
   * If we decided to add or remove a field in the database, how many changes on the code would you have had to make before? What about after?  What about other changes to the databases?
-  * Using your new code, can you write a script to populate the database with dummy data? 
+  * Using your new code, can you write a script to populate the database with dummy data?
 
 ##Resources
 
