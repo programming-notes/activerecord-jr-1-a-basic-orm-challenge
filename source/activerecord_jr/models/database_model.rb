@@ -29,6 +29,14 @@ module Database
       @connection.type_translation = true
     end
 
+    def self.transaction
+      Database::Model.connection.transaction
+    end
+
+    def self.rollback
+      Database::Model.connection.rollback
+    end
+
     def self.attribute_names
       @attribute_names
     end
